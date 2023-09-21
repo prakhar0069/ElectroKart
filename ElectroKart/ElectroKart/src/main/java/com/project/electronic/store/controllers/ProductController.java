@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,18 +27,21 @@ public class ProductController {
     private FileService fileService;
     @Value("${product.image.path}")
     private String imagePath;
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
         ProductDto createdProduct = productService.create(productDto);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{productId}")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable String productId,@RequestBody ProductDto productDto){
         ProductDto updatedProduct = productService.update(productDto,productId);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{productId}")
     public ResponseEntity<ApiResponseMessage> delete(@PathVariable String productId){
         productService.delete(productId);
@@ -85,6 +89,7 @@ public class ProductController {
         return new ResponseEntity<>(pageableResponse,HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/image/{productId}")
     public ResponseEntity<ImageResponse> uploadProductImage(
             @PathVariable String productId,

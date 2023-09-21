@@ -1,11 +1,16 @@
 package com.project.electronic.store.dto;
 
+import com.project.electronic.store.entities.Role;
 import com.project.electronic.store.validate.ImageNameValid;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,6 +23,7 @@ public class UserDto {
     private String userId;
 
     @Size(min=3,max=20,message = "Invalid name !!")
+    @Schema(name = "username", accessMode = Schema.AccessMode.READ_ONLY, description = "user name of new user !!")
     private String name;
 
     //@Email(message = "Invalid User Email !!")
@@ -36,4 +42,6 @@ public class UserDto {
 
     @ImageNameValid
     private String imageName;
+
+    private Set<RoleDto> roles = new HashSet<>();
 }

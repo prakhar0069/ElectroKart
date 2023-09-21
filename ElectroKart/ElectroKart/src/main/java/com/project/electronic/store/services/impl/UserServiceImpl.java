@@ -2,9 +2,11 @@ package com.project.electronic.store.services.impl;
 
 import com.project.electronic.store.dto.PageableResponse;
 import com.project.electronic.store.dto.UserDto;
+import com.project.electronic.store.entities.Role;
 import com.project.electronic.store.entities.User;
 import com.project.electronic.store.exceptions.ResourceNotFoundException;
 import com.project.electronic.store.helper.Helper;
+import com.project.electronic.store.repositories.RoleRepository;
 import com.project.electronic.store.repositories.UserRepository;
 import com.project.electronic.store.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -40,7 +43,16 @@ public class UserServiceImpl implements UserService {
     @Value("${user.profile.image.path}")
     private String imagePath;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Value("${normal.role.id}")
+    private String normalRoleId;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -48,7 +60,14 @@ public class UserServiceImpl implements UserService {
         String userId = UUID.randomUUID().toString();
         userDto.setUserId(userId);
 
+        //encoding password
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
         User user = dtoToEntity(userDto);
+
+        //fetch role of normal user and set it to user
+        Role role = roleRepository.findById(normalRoleId).get();
+        user.getRoles().add(role);
         User savedUser = userRepository.save(user);
 
         UserDto newDto = entityToDto(savedUser);

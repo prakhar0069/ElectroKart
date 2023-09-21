@@ -6,6 +6,10 @@ import com.project.electronic.store.dto.PageableResponse;
 import com.project.electronic.store.dto.UserDto;
 import com.project.electronic.store.services.FileService;
 import com.project.electronic.store.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -27,6 +31,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "UserController", description = "Rest APIs related to perform")
 public class UserController {
 
     @Autowired
@@ -41,6 +46,12 @@ public class UserController {
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping
+    @Operation(summary = "create new user !!",description = "this is user api")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success | OK"),
+            @ApiResponse(responseCode = "401", description = "not authorized !!"),
+            @ApiResponse(responseCode = "201", description = "new user created !!")
+    })
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
         UserDto userDto1 = userService.createUser(userDto);
         return new ResponseEntity<>(userDto1, HttpStatus.CREATED);
@@ -67,6 +78,7 @@ public class UserController {
     }
 
     @GetMapping
+    @Operation(summary = "get all users")
     public ResponseEntity<PageableResponse<UserDto>> getAllUsers(
             @RequestParam(value="pageNumber", defaultValue = "0", required = false) int pageNumber,
             @RequestParam(value="pageSize", defaultValue = "10", required = false) int pageSize,
@@ -77,6 +89,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
+    @Operation(summary = "Get single user by userid !!")
     public ResponseEntity<UserDto> getUser(@PathVariable  String userId){
         return new ResponseEntity<>(userService.getUserById(userId),HttpStatus.OK);
     }

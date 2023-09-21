@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -24,6 +25,7 @@ public class CategoryController {
     @Autowired
     private ProductService productService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto){
         String categoryId = UUID.randomUUID().toString();
@@ -32,12 +34,14 @@ public class CategoryController {
         return new ResponseEntity<>(categoryDto1, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{categoryId}")
     public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable String categoryId){
         CategoryDto updatedCategory = categoryService.update(categoryDto, categoryId);
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<ApiResponseMessage> deleteCategory(@PathVariable String categoryId){
         categoryService.delete(categoryId);
