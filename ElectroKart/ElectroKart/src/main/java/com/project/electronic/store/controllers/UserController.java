@@ -9,6 +9,7 @@ import com.project.electronic.store.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -30,6 +31,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "scheme1")
 @RequestMapping("/users")
 @Tag(name = "UserController", description = "Rest APIs related to perform")
 public class UserController {

@@ -3,6 +3,7 @@ package com.project.electronic.store.controllers;
 import com.project.electronic.store.dto.*;
 import com.project.electronic.store.services.FileService;
 import com.project.electronic.store.services.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @RestController
+@SecurityRequirement(name = "scheme1")
 @RequestMapping("/products")
 public class ProductController {
 

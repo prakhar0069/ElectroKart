@@ -5,6 +5,7 @@ import com.project.electronic.store.dto.CreateOrderRequest;
 import com.project.electronic.store.dto.OrderDto;
 import com.project.electronic.store.dto.PageableResponse;
 import com.project.electronic.store.services.OrderService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "scheme1")
 @RequestMapping("/orders")
 public class OrderController {
 

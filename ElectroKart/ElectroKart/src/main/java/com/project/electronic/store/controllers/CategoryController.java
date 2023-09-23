@@ -7,6 +7,7 @@ import com.project.electronic.store.dto.PageableResponse;
 import com.project.electronic.store.dto.ProductDto;
 import com.project.electronic.store.services.CategoryService;
 import com.project.electronic.store.services.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
+@SecurityRequirement(name = "scheme1")
 @RequestMapping("/categories")
 public class CategoryController {
 
