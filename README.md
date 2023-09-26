@@ -26,6 +26,10 @@ Welcome to ElectroKart, an e-commerce web application built with ReactJS and Spr
 - **Pagination**: Navigate through a large selection of products with ease.
 - **Security**: i use JWT for Spring Security to keep your data safe and secure.
 
+## JUnit Testing
+
+I believe in the importance of robust and reliable code. As such, I have implemented comprehensive JUnit tests to ensure the reliability and quality of the ElectroKart application. These tests cover critical parts of the application, including data access, services, and controllers.
+
 ## Swagger Documentation
 
 Explore the API documentation for ElectroKart using Swagger. Swagger makes it easy to understand the API endpoints and interact with them. To access the Swagger documentation, follow these steps:
@@ -40,8 +44,6 @@ Explore the API documentation for ElectroKart using Swagger. Swagger makes it ea
 
 I am actively working on enhancing ElectroKart with the following features:
 
-- **JUnit Testing**: I am implementing comprehensive JUnit tests to ensure the reliability and robustness of our application.
-
 - **Payment Integration**: Soon, i'll be able to make secure payments within ElectroKart, making your shopping experience even more convenient.
 
 ## Deployment
@@ -50,7 +52,7 @@ ElectroKart is deployed on an AWS EC2 instance using Docker. To access the live 
 
 [Live Demo](http://65.1.17.247:9091)
 
-## Contributing
+## Contributions
 
 This project is a personal endeavor, and I'm not currently accepting contributions. However, feel free to explore the code and use it as a reference for your own projects.
 
