@@ -34,6 +34,7 @@ import java.util.List;
 @SecurityRequirement(name = "scheme1")
 @RequestMapping("/users")
 @Tag(name = "UserController", description = "Rest APIs related to perform")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired

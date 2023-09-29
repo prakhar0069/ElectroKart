@@ -25,6 +25,7 @@ import java.security.Principal;
 @RequestMapping("/auth")
 @Tag(name = "AuthController", description = "APIs for Authentication")
 @SecurityRequirement(name = "scheme1")
+@CrossOrigin("*")
 public class AuthController {
 
     @Autowired

@@ -20,6 +20,7 @@ import java.util.UUID;
 @RestController
 @SecurityRequirement(name = "scheme1")
 @RequestMapping("/categories")
+@CrossOrigin("*")
 public class CategoryController {
 
     @Autowired

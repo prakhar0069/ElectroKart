@@ -21,6 +21,7 @@ import java.io.InputStream;
 @RestController
 @SecurityRequirement(name = "scheme1")
 @RequestMapping("/products")
+@CrossOrigin("*")
 public class ProductController {
 
     @Autowired

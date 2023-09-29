@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = "scheme1")
 @RequestMapping("/carts")
 @Tag(name = "Cart Controller", description = "This is cart api for cart operation")
+@CrossOrigin("*")
 public class CartController {
 
     @Autowired

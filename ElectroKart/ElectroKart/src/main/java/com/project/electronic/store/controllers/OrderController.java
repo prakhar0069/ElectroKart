@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @SecurityRequirement(name = "scheme1")
 @RequestMapping("/orders")
+@CrossOrigin("*")
 public class OrderController {
 
     @Autowired
